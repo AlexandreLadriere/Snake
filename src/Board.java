@@ -14,6 +14,7 @@ public class Board extends JPanel implements ActionListener {
     private int dots; // Number of dots in the snake
     private int apple_x; // x position of the apple on the board
     private int apple_y; // y position of the apple on the board
+    private int score; // score (number of apple that the snake ate
 
     private boolean leftDir = false;
     private boolean rightDir = true;
@@ -98,11 +99,13 @@ public class Board extends JPanel implements ActionListener {
     private void gameOver(Graphics g) {
         String msgGameOver = "Game Over";
         String msgRestart = "Press SPACE to restart";
+        String msgScore = "Score: " + score;
         Font small = new Font("Open Sans", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msgGameOver, (Constants.B_WIDTH - metr.stringWidth(msgGameOver)) / 2, Constants.B_HEIGHT / 4);
+        g.drawString(msgScore, (Constants.B_WIDTH - metr.stringWidth(msgScore)) / 2, Constants.B_HEIGHT / 2);
         g.drawString(msgRestart, (Constants.B_WIDTH - metr.stringWidth(msgRestart)) / 2, 3 * (Constants.B_HEIGHT / 4));
     }
 
@@ -123,6 +126,7 @@ public class Board extends JPanel implements ActionListener {
      */
     private void initGame() {
         dots = 3; // Length of the snake when the game starts
+        score = 0;
         for (int i = 0; i < dots; i++) {
             x[i] = (Constants.B_WIDTH/6) - i * Constants.DOT_SIZE;
             y[i] = (Constants.B_WIDTH/6);
@@ -138,6 +142,7 @@ public class Board extends JPanel implements ActionListener {
     private void checkApple() {
         if(x[0] == apple_x && y[0] == apple_y) {
             dots++;
+            score++;
             locateApple();
         }
     }
