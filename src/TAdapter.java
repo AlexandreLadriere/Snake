@@ -1,3 +1,5 @@
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -44,6 +46,11 @@ public class TAdapter extends KeyAdapter {
         }
         if ((key == KeyEvent.VK_SPACE) && (!board.getInGame())) {
             board.restart();
+        }
+        if (key == KeyEvent.VK_Q) {
+            JComponent comp = (JComponent) e.getSource();
+            Window win = SwingUtilities.getWindowAncestor(comp);
+            win.dispose();
         }
     }
 }
