@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
  */
 public class Board extends JPanel implements ActionListener {
 
-    private final int x[] = new int[Constants.MAX_DOTS]; // x coordinates of the snake body
-    private final int y[] = new int[Constants.MAX_DOTS]; // coordinates of the snake body
+    private final int[] x = new int[Constants.MAX_DOTS]; // x coordinates of the snake body
+    private final int[] y = new int[Constants.MAX_DOTS]; // coordinates of the snake body
 
     private int dots; // Number of dots in the snake
     private int apple_x; // x position of the apple on the board
@@ -46,7 +46,20 @@ public class Board extends JPanel implements ActionListener {
     }
 
     /**
+     * Restarts the game
+     */
+    public void restart() {
+        leftDir = false;
+        rightDir = true;
+        upDir = false;
+        downDir = false;
+        inGame = true;
+        initGame();
+    }
+
+    /**
      * Overrides the paintComponent function
+     *
      * @param g Graphics you want to "draw"
      */
     @Override
@@ -83,12 +96,14 @@ public class Board extends JPanel implements ActionListener {
      * @param g Graphics to update
      */
     private void gameOver(Graphics g) {
-        String msg = "Game Over";
+        String msgGameOver = "Game Over";
+        String msgRestart = "Press SPACE to restart";
         Font small = new Font("Open Sans", Font.BOLD, 14);
         FontMetrics metr = getFontMetrics(small);
         g.setColor(Color.white);
         g.setFont(small);
-        g.drawString(msg, (Constants.B_WIDTH - metr.stringWidth(msg)) / 2, Constants.B_HEIGHT / 2);
+        g.drawString(msgGameOver, (Constants.B_WIDTH - metr.stringWidth(msgGameOver)) / 2, Constants.B_HEIGHT / 4);
+        g.drawString(msgRestart, (Constants.B_WIDTH - metr.stringWidth(msgRestart)) / 2, 3 * (Constants.B_HEIGHT / 4));
     }
 
     /**
@@ -167,8 +182,9 @@ public class Board extends JPanel implements ActionListener {
     private void checkCollision() {
         // Check if the snake ate itself
         for (int i = dots; i > 0; i--) {
-            if ( (i > 4) && (x[0] == x[i]) && (y[0] == y[i])) {
+            if ((i > 4) && (x[0] == x[i]) && (y[0] == y[i])) {
                 inGame = false;
+                break;
             }
         }
         // Check if the snake "ate" the border
@@ -262,9 +278,19 @@ public class Board extends JPanel implements ActionListener {
 
     /**
      * Sets the "downDir" parameter
+     *
      * @param downDir boolean (true if downDir, else false)
      */
     public void setDownDir(boolean downDir) {
         this.downDir = downDir;
+    }
+
+    /**
+     * Gets the "inGame" parameter
+     *
+     * @return boolean (true if in game, else false)
+     */
+    public boolean getInGame() {
+        return inGame;
     }
 }

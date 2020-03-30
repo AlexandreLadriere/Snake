@@ -42,6 +42,9 @@ public class TAdapter extends KeyAdapter {
             board.setRightDir(false);
             board.setLeftDir(false);
         }
+        if ((key == KeyEvent.VK_SPACE) && (!board.getInGame())) {
+            board.restart();
+        }
     }
 }
 
