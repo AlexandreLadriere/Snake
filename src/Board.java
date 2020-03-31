@@ -113,11 +113,11 @@ public class Board extends JPanel implements ActionListener {
      * Loads all images needed
      */
     private void loadImages() {
-        ImageIcon iisquare = new ImageIcon("src/resources/square.png");
+        ImageIcon iisquare = new ImageIcon(this.getClass().getResource("/resources/square.png"));
         square = iisquare.getImage();
-        ImageIcon iiapple = new ImageIcon("src/resources/apple.png");
+        ImageIcon iiapple = new ImageIcon(this.getClass().getResource("/resources/apple.png"));
         apple = iiapple.getImage();
-        ImageIcon iihead = new ImageIcon("src/resources/head.png");
+        ImageIcon iihead = new ImageIcon(this.getClass().getResource("/resources/head.png"));
         head = iihead.getImage();
     }
 
