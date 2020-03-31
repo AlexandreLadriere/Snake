@@ -55,6 +55,9 @@ public class Board extends JPanel implements ActionListener {
         upDir = false;
         downDir = false;
         inGame = true;
+        if (inGame) {
+            timer.stop();
+        }
         initGame();
     }
 
